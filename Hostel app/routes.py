@@ -1,18 +1,16 @@
-from flask import jsonify, request, session, Blueprint
+from flask import jsonify, render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 
+from app import app, db, login_manager
+from models import User
+from utils import send_OTP, verify_otp
 
+@app.route('/')
+def home():
+    return render_template("index.html")
 
-main_bp = Blueprint('main', __name__)
-
-from app.app import db, login_manager
-from app.models import User
-from app.utils import send_OTP, verify_otp
-
-
-
-@main_bp.route('/register', methods=["POST"])
+@app.route('/register', methods=["POST"])
 def register():
     if request.method == "POST":
         email = request.json["email"]
@@ -44,7 +42,7 @@ def register():
 
        
 
-@main_bp.route('/login', methods=["POST"])
+@app.route('/login', methods=["POST"])
 def login():
     if request.method == "POST":
         email = request.json['email']
@@ -61,7 +59,7 @@ def login():
 
 
 
-@main_bp.route('/check_OTP', methods=["POST"])
+@app.route('/check_OTP', methods=["POST"])
 @login_required
 def check_OTP():
     if request.method == "POST":
@@ -71,7 +69,7 @@ def check_OTP():
         else:
             return jsonify({"success": False, "message": "Invalid OTP"})
 
-@main_bp.route('/@me')
+@app.route('/@me')
 @login_required
 def secrets():
     user_id = session.get("user_id")
@@ -85,27 +83,7 @@ def secrets():
 
 
 
-@main_bp.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop("user_id")
     return "200"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
