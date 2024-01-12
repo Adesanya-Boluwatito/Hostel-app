@@ -2,9 +2,13 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from routes import *
-from models import *
-from utils import *
+from user import bp
+from properties import bp as properties_bp
+from config import db
+from user.routes import User
+
+
+
 
 app = Flask(__name__)
 
@@ -17,28 +21,38 @@ CORS(app, supports_credentials=True)  # Enable CORS for all routes
 
 # Your routes and other configurations...
 
-###################
 
-# app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 app.static_folder = 'static'
 
 # CONNECT TO DB
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Boluwatito@localhost/real_estate_app'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Boluwatito@localhost/real_estate_app'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:malikahmed@localhost/real_estate_app'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
 
 db.init_app(app)
 login_manager = LoginManager(app)
+
+
+
+app.register_blueprint(bp)
+app.register_blueprint(properties_bp)
+
+
 
 with app.app_context():
     db.create_all()
 
 # Import routes, models, and utils
-from routes import *
-from models import *
-from utils import *
+
+
 
 @login_manager.user_loader
 def load_user(user_id):

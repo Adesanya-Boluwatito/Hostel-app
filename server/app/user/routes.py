@@ -2,15 +2,17 @@ from flask import jsonify, render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 
-from app import app, db, login_manager
-from models import User
+from user import bp
+from config import db
+from models.users_model import User
 from utils import send_OTP, verify_otp
 
-@app.route('/')
+
+@bp.route('/')
 def home():
     return render_template("index.html")
 
-@app.route('/register', methods=["POST"])
+@bp.route('/register', methods=["POST"])
 def register():
     if request.method == "POST":
         email = request.json["email"]
@@ -42,7 +44,7 @@ def register():
 
        
 
-@app.route('/login', methods=["POST"])
+@bp.route('/login', methods=["POST"])
 def login():
     if request.method == "POST":
         email = request.json['email']
@@ -51,7 +53,7 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if user and check_password_hash(user.password, password):
-            send_OTP(email)
+            # send_OTP(email)
             login_user(user)
             return jsonify({"success": True, "message": "Login successful"})
         else:
@@ -59,7 +61,7 @@ def login():
 
 
 
-@app.route('/check_OTP', methods=["POST"])
+@bp.route('/check_OTP', methods=["POST"])
 @login_required
 def check_OTP():
     if request.method == "POST":
@@ -69,7 +71,7 @@ def check_OTP():
         else:
             return jsonify({"success": False, "message": "Invalid OTP"})
 
-@app.route('/@me')
+@bp.route('/@me')
 @login_required
 def secrets():
     user_id = session.get("user_id")
@@ -83,7 +85,7 @@ def secrets():
 
 
 
-@app.route('/logout', methods=['POST'])
+@bp.route('/logout', methods=['POST'])
 def logout():
     session.pop("user_id")
     return "200"
