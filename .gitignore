@@ -1,2 +1,5 @@
 # Ignore this file directory
 serviceAccount.json
+upload.py
+file.json
+.env

@@ -6,13 +6,15 @@ from models.realtors_model import Realtor
 from config import db
 from properties import bp
 import os
+from dotenv import load_dotenv
 import uuid  # Import uuid
 import firebase_admin
 from firebase_admin import credentials, storage
 
+load_dotenv()
 
-cred = credentials.Certificate(r"server\app\properties\serviceAccount.json")
-firebase_admin.initialize_app(cred, {'storageBucket': 'real-auth-60301.appspot.com'})
+cred = credentials.Certificate(os.getenv(r"FIREBASE_SERVICE_ACCOUNT_PATH"))
+firebase_admin.initialize_app(cred, {'storageBucket': os.getenv("FIREBASE_STORAGE_BUCKET")})
 
 
 
