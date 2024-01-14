@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import  request, jsonify,current_app
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from models.properties_model import Property, Image
@@ -7,34 +7,56 @@ from config import db
 from properties import bp
 import os
 import uuid  # Import uuid
+import firebase_admin
+from firebase_admin import credentials, storage
+
+
+cred = credentials.Certificate(r"server\app\properties\serviceAccount.json")
+firebase_admin.initialize_app(cred, {'storageBucket': 'real-auth-60301.appspot.com'})
+
+
+
+
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@bp.route('/create_property', methods=['POST'])
-def create_property():
-    # user = Realtor.query.get(realtor_id)
-    # if user is None:
-    #     return jsonify("Unauthorized user"), 401
+@bp.route('/create_property/<realtor_id>', methods=['POST'])
+def create_property(realtor_id):
+    print(realtor_id)
+    realtor_exists = Realtor.query.filter_by(realtor_id=realtor_id).first() is not None
+    if not realtor_exists:
+        print(realtor_id)
+        return jsonify({"error": "Unauthorized user"}), 401
 
-    request_data = request.get_json()
+    request_data = None
+
+    if request.headers['Content-Type'] == 'application/json':
+        request_data = request.get_json()
+
+    elif request.form:
+        request_data = {key: request.form[key] for key in request.form}
+    if request_data is None:
+        # If not JSON, assume form-data
+        return jsonify({"error": "Invalid request format"}), 400
+    print(request_data)
 
     # Create a new property
     new_property = Property(
-                            owner_id=request_data['owner_id'],
-                            location=request_data['location'],
-                            description=request_data['description'],
-                            # property_images=request_data.get('property_images', []),
-                            address=request_data['address'],
-                            bedrooms=request_data['bedrooms'],
-                            bathrooms=request_data['bathrooms'],
-                            title=request_data['title'],
-                            category=request_data['category'],
-                            price=request_data['price'],
-                            property_type=request_data['property_type'],
-                            size=request_data['size'],
+                            id=str(uuid.uuid4()),
+                            owner_id=request_data.get('owner_id'),
+                            location=request_data.get('location'),
+                            description=request_data.get('description'),
+                            address=request_data.get('address'),
+                            bedrooms=request_data.get('bedrooms'),
+                            bathrooms=request_data.get('bathrooms'),
+                            title=request_data.get('title'),
+                            category=request_data.get('category'),
+                            price=request_data.get('price'),
+                            property_type=request_data.get('property_type'),
+                            size=request_data.get('size'),
                             active=request_data.get('active', True),
                             date_created=datetime.utcnow())
 
@@ -42,15 +64,19 @@ def create_property():
         db.session.add(new_property)
         db.session.commit()
 
-        # Handle file upload
-        file = request.files['file']
+    # Handle file upload
+        file = request.files.get('file')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(bp.config['UPLOAD_FOLDER'], filename))
+            # file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            bucket = storage.bucket()
+            blob = bucket.blob(f'property_images/{new_property.id}/{filename}')
+            blob.upload_from_string(file.read(), content_type=file.content_type)
 
             new_image = Image(
                 property_id=new_property.id,
-                filename=filename
+                filename=filename,
+                storage_url=blob.public_url 
             )
 
             db.session.add(new_image)

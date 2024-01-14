@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from user import bp
 from properties import bp as properties_bp
+from realtors import bp as realtors_bp
 from config import db
 from user.routes import User
 
@@ -31,7 +32,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Boluwatito@localhost/real_
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:malikahmed@localhost/real_estate_app'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'C:\\Users\\user\\Desktop\\Hostel app\\server\\app\\uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -44,6 +45,7 @@ login_manager = LoginManager(app)
 
 app.register_blueprint(bp)
 app.register_blueprint(properties_bp)
+app.register_blueprint(realtors_bp)
 
 
 

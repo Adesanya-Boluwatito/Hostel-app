@@ -5,10 +5,10 @@ from config import db
 
 
 class Realtor(db.Model):
-    id = db.Column(db.String(36), primary_key=True)
-    realtor_id = db.Column(db.String(255), index=True, unique=True)
-    company_name = db.Column(db.String(255), index=False, unique=False)
-    description = db.Column(db.Text, index=False, unique=False)
+    id = db.Column(db.String(255), primary_key=True)
+    realtor_id = db.Column(db.String(255),index=True, unique=True, nullable=False)
+    company_name = db.Column(db.String(255), index=False, unique=False, nullable=False)
+    description = db.Column(db.Text(255), index=False, unique=False)
     profile_picture = db.Column(db.String(255), index=False, unique=False)
     company_mail = db.Column(db.String(255), index=False,
                              unique=False, nullable=True)
@@ -18,7 +18,7 @@ class Realtor(db.Model):
     active = db.Column(db.Boolean, index=False, default=True, unique=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     properties = db.relationship(
-        'Property', backref='realtor', lazy='dynamic', cascade='all, delete, delete-orphan')
+        'Property', backref='realtor', lazy='dynamic')
     # followers = db.relationship(
     #     'Realtor_follower', backref="realtor",  cascade='all, delete, delete-orphan')
 
