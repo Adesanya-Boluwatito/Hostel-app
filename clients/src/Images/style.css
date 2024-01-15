@@ -1,0 +1,120 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+.iconimg {
+    width: 100px;
+    height: 40px;
+    background-color: #8B8B8B;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.homePage {
+    background-color: #0A2463;
+    color: white;
+    height: 768px;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+.links {
+    display: flex;
+    width: 550px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signup {
+    background-color: #413B87;
+    height: 65px;
+    width: 167px;
+    /* -align: center; */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    color: white;
+    border-radius: 15px;
+    background-color: #0A2463;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    width: 148px;
+    height: 50px;
+}
+
+.search-box {
+    background-color: white;
+    border-radius: 15px;
+    width: 640px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-input {
+    height: 50px;
+    width: 487px;
+    padding-left: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+}
+
+.homePageText1 {
+    font-size: 60px;
+    width: 375px;
+}
+
+.homePageText {
+    padding-left: 90px;
+    margin-top: 125px;
+    position: relative;
+}
+
+.homePageImage {
+    position: absolute;
+    top: 0px;
+    height: 628px;
+    width: 524px;
+    background-color: white;
+    border-radius: 250px 250px 0px 0px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    right: 163px;
+    top: 140px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* align-items: 12; */
+    padding-top: 12px;
+}
+
+.homePageImage1 {
+    border-radius: 249px 249px 0px 0px;
+    border: 1px solid red;
+}
+
+.homePageImage2 {
+    height: 680px;
+    width: 498px;
+    /* border-radius: 250px 250px 0px 0px; */
+}
