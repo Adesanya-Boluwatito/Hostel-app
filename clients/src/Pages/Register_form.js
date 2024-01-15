@@ -68,37 +68,97 @@ class PasswordForm extends Component {
     const { password, confirmPassword, fieldErrors } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={this.handlePasswordChange}
-          />
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={this.handleConfirmPasswordChange}
-          />
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-        {fieldErrors.failedRules.length > 0 && (
-          <div style={{ color: 'red' }}>
-            <p>Validation Errors:</p>
-            <ul>
-              {fieldErrors.failedRules.map((error, index) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
+      <div className="container">
+        <div className="register-page">
+          <div className='theErrors'>
+            {this.state.fieldErrors2.failedRules.length > 0 && (
+              <div className='theErrors'>
+                <img src={Image.errorIcon} alt='cancel' />
+                <div>
+                  <ul>
+                    {this.state.fieldErrors2.failedRules.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+                <img src={Image.cancelIcon} alt='cancel' />
+              </div>
+            )}
           </div>
-        )}
-      </form>
+
+          <div className="grad">
+            <form onSubmit={this.onFormSubmit} className="register-form" action="">
+              <p>Register</p>
+              <div className='theInput'>
+                <input
+                  className={this.state.nameClasses}
+                  placeholder="Name"
+                  type="text" name="name" id=""
+                  value={this.state.newName}
+                  onChange={this.onNameChange}
+                />
+                <span className='pop'> {this.state.fieldErrors.name && (<div>
+                  {this.state.fieldErrors.name}</div>
+                )}</span>
+              </div>
+              <div className='theInput'>
+                <input
+                  className={this.state.emailClasses}
+                  placeholder="Email Address"
+                  type="text" name="email" id=""
+                  value={this.state.newEmail}
+                  onChange={this.onEmailChange}
+                />
+                <span className='pop'>{this.state.emailExit && <div>email address already exist</div>}{this.state.fieldErrors.email && (<div>
+                  {this.state.fieldErrors.email}</div>
+                )}</span>
+              </div>
+              <div className='theInput'>
+                <div className={"inputTag " + this.state.passwordClasses}>
+                  <input placeholder='Password'
+                    className={this.state.border}
+                    value={this.state.newPassword}
+                    onChange={this.onPasswordChange}
+                    type={this.state.inputType}
+                    name="password"
+                  />
+                  {this.state.openPass ?
+                    (<img src={Image.theeyeopen} alt='open password' onClick={this.closePassword} />) :
+                    (<img src={Image.theeyeclose} alt='close password' onClick={this.openPassword} />)
+                  }
+                </div>
+                <div>
+                  {this.state.fieldErrors.password && (
+                    <div className='pop'>{this.state.fieldErrors.password}</div>
+                  )}
+                </div>
+              </div>
+              <div className='theInput'>
+                <div className={"inputTag " + this.state.passwordClasses}>
+                  <input
+                    placeholder="Re-type Password" name="confirmPassword" id=""
+                    value={this.state.onPassword2Change}
+                    onChange={this.onPassword2Change}
+                    type={this.state.inputType2}
+                  />
+                  {this.state.openPass2 ?
+                    (<img src={Image.theeyeopen} alt='open password' onClick={this.closePassword2} />) :
+                    (<img src={Image.theeyeclose} alt='close password' onClick={this.openPassword2} />)
+                  }
+                </div>
+              </div>
+
+              <button type="submit">Register</button>
+              <Link className="myLink" to="/login">Already have an account</Link>
+            </form>
+            <div className="media">
+              <p>Or sign up with</p>
+              <img className="withgoogle1" src={Image.googleIconImg} alt="" />
+            </div>
+          </div>
+          <Link to="/" className="iconimg main-icon">icon</Link>
+        </div>
+      </div>
     );
   }
 }
