@@ -20,7 +20,7 @@ class Property(db.Model):
     size = db.Column(db.String(255), index=False, unique=False)
 
     def get_property_images(self):
-        return self.property_images
+        return [image.serialize() for image in self.images]
 
     def __repr__(self):
         return f'<Property "{self.id}">'
@@ -50,5 +50,16 @@ class Image(db.Model):
     property_id = db.Column(db.String(255), db.ForeignKey('property.id'), nullable=False)
     filename = db.Column(db.String(255), nullable=False)
     storage_url=db.Column(db.String(255), nullable=False)
+    expiration_time = db.Column(db.DateTime, nullable=True)
 
     property = db.relationship('Property', backref=db.backref('images', lazy=True))
+
+    def serialize(self):
+        return {
+            'filename': self.filename,
+            'storage_url': self.storage_url,
+            'expiration_time': self.expiration_time.isoformat() if self.expiration_time else None
+
+        }
+
+

@@ -43,6 +43,7 @@ login_manager = LoginManager(app)
 
 
 
+
 app.register_blueprint(bp)
 app.register_blueprint(properties_bp)
 app.register_blueprint(realtors_bp)
