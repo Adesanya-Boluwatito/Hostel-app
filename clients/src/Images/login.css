@@ -1,0 +1,74 @@
+* {
+    box-sizing: content-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-page {
+    width: 428px;
+    height: 900PX;
+    background-image: url('hostelhome.svg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.login-form {
+    width: 300px;
+    height: 396px;
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.login-form>input {
+    width: 252px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    width: 80%;
+    padding-left: 20px;
+    background-color: #1D2226;
+
+}
+
+.login-form>button {
+    width: 80%;
+    height: 52px;
+    background-color: #6D67D2;
+    border-radius: 10px;
+    font: 16px;
+    color: white;
+    border: none;
+
+}
+
+.login-form>p {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login-form>a {
+    color: #6D67D2;
+    text-decoration: none;
+}
+
+.grad {
+    background: linear-gradient(180deg, rgba(121, 110, 252, 0) 30%, rgba(90, 82, 187, 1) 60%, rgba(61 55, 126, 1) 100%);
+    height: 552px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

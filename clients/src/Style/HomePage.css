@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Schibsted+Grotesk:wght@600&display=swap');
+
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+
+.iconimg {
+    width: 100px;
+    height: 40px;
+    background-color: #8B8B8B;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.homePage {
+    background-color: #0A2463;
+    color: white;
+    height: 768px;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+nav>div>div:hover {
+    color: wheat;
+}
+
+.links {
+    display: flex;
+    width: 370px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signup {
+    background-color: #413B87;
+    height: 65px;
+    width: 167px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.links > *{
+    text-decoration: none;
+    color: white;   
+}
+
+.search {
+    color: white;
+    border-radius: 15px;
+    background-color: #0A2463;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    width: 148px;
+    height: 50px;
+}
+
+.search-box {
+    background-color: white;
+    border-radius: 15px;
+    width: 640px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-input {
+    height: 50px;
+    width: 487px;
+    padding-left: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+}
+
+.homePageText1{
+    font-size: 60px;
+    width: 460px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Schibsted Grotesk', sans-serif;
+}
+
+
+
+.homePageText {
+    padding-left: 90px;
+    margin-top: 125px;
+    position: relative;
+}
+
+.homePageImage {
+    position: absolute;
+    top: 0px;
+    height: 628px;
+    width: 514px;
+    background-color: white;
+    border-radius: 250px 250px 0px 0px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    right: 163px;
+    top: 140px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* align-items: 12; */
+    padding-top: 7px;
+}
+
+.homePageImage1 {
+    border-radius: 249px 249px 0px 0px;
+}
+
+.homePageImage2 {
+    height: 680px;
+    width: 498px;
+    /* border-radius: 250px 250px 0px 0px; */
+}
+
+/* ////////////// */
+input:focus {
+    outline: none;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user>img {
+    height: 70px;
+    z-index: 1;
+}
+
+.buy-rent {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    align-items: center;
+}
+
+.user>p {
+    background-color: #413B87;
+    height: 65px;
+    width: 167px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: -50px;
+    padding-left: 10px;
+}
+
+.cir-img1 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #D98B22, #E84545);
+
+}
+
+.cir-img2 {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #4AFDF8, #0A3FD4);
+}
+
+.cir-img3 {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #D98B22, #E84545);
+
+}
+
+.cir-img4 {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #B422D9, #808080);
+}
+
+.cir-img5 {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #E0371D, #7645E8);
+}
+
+.cir-img6 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #D98B22, #E84545);
+
+}
+
+.cir-img7 {
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #C6C6C6, #073CE4);
+
+}
+
