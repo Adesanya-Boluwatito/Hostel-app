@@ -1,51 +1,46 @@
-import React from 'react'
-import '../Style/register.css'
-import '../Style/Login.css'
-import Image from './Images'
-import isEmail from 'validator/lib/isEmail'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import '../Style/register.css';
+import Image from './Images';
+import isEmail from 'validator/lib/isEmail';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 
+const Login = () => {
+    const [newEmail, setNewEmail] = useState();
+    // const [loginFeedback, setLoginFeedback] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [fieldErrors, setFieldErrors] = useState({
+        name: ""
+    });
+    const [fieldErrors2, setFieldErrors2] = useState({ isValid: false, failedRules: [] });
+    const [emailClasses, setEmailClasses] = useState();
+    const [passwordClasses, setPasswordClasses] = useState();
+    // const [emailDoesNotExist, setDoesNotEmailExist] = useState();
+    const [openThePassword, setOpenPassword] = useState({ openPass: false, inputType: 'password' })
+    const [newUserCredentials, setNewUserCredentials] = useState({
+        email: '',
+        password: '',
+        //add password & password2
+    })
+    const navigate = useNavigate();
 
-class Login extends React.Component {
-    state = {
-        fieldErrors: {},
-        fieldErrors2: { isValid: false, failedRules: [] },
-        emailValid: false,
-        passwordValid: '',
-        openPass: false,
-        emailClasses: "",
-        passwordClasses: "",
-        inputType: "password",
-        newEmail: "",
-        newPassword: "",
-        newUserCredentials: {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        },
-    }
-    onFormSubmit = (event) => {
+    const onFormSubmit = (event) => {
         event.preventDefault();
-        const { password, confirmPassword } = this.state.newUserCredentials;
-        const person = this.state.newUserCredentials;
-        const fieldErrors = this.validate(person);
-        const fieldErrors2 = this.validatePassword(password, confirmPassword);
-        this.setState({ fieldErrors2 });
-        this.setState({ fieldErrors });
-        this.setState({ nameClasses: 'name' in fieldErrors ? "error" : "none" });
-        this.setState({ emailClasses: 'email' in fieldErrors ? "error" : "noerror" });
-        this.setState({ passwordClasses: fieldErrors2.isValid ? "noerror" : "error" });
-        if (!Object.keys(fieldErrors).length === 0 && !fieldErrors2.isValid) {
-            console.log("it is not valid");
-            return
-        }
-        // this.handleSubmit(this.state.newUserCredentials);
+        const { password, confirmPassword } = newUserCredentials;
+        const person = newUserCredentials;
+        const theFieldErrors = validate(person);
+        const theFieldErrors2 = validatePassword(password, confirmPassword);
+        setFieldErrors2(theFieldErrors2);
+        setFieldErrors(theFieldErrors);
+        setEmailClasses('email' in theFieldErrors ? "error" : "noerror");
+        setPasswordClasses(theFieldErrors2.isValid ? "noerror" : "error");
+        console.log(theFieldErrors);
+        console.log(theFieldErrors2);
+        if (Object.keys(fieldErrors).length !== 0 && !fieldErrors2.isValid) return
+        handleSubmit(newUserCredentials);
     }
-
-    validate = person => {
+    const validate = person => {
         const errors = {};
         if (!person.email) errors.email = 'Email Required';
         if (!person.password) errors.password = 'password Required';
@@ -54,60 +49,8 @@ class Login extends React.Component {
         if (person.email && !isEmail(person.email)) errors.email = 'Invalid Email';
         return errors;
     };
-    handleSubmit = async (newUser) => {
-        const { email, name, password } = newUser
-        console.log(email, name, password);
-        try {
-            const response = await axios.post('http://localhost:5000/register', { "email": email, "name": name, "password": password });
-            console.log('Response:', response.data);
-            console.log('the response error', response.data);
-            // Handle successful response
-        } catch (error) {
-            console.error('Error:', error);
-            // Handle error
-        }
-    }
-    onNameChange = (evt) => {
-        this.setState({ newName: evt.target.value })
-        const fields = this.state.newUserCredentials
-        fields[evt.target.name] = evt.target.value
-        this.setState({ newUserCredentials: fields })
-    }
-    onEmailChange = (evt) => {
-        this.setState({ newEmail: evt.target.value })
-        const fields = this.state.newUserCredentials
-        fields[evt.target.name] = evt.target.value
-        this.setState({ newUserCredentials: fields })
-    }
-    onPasswordChange = (evt) => {
-        this.setState({ newPassword: evt.target.value })
-        const fields = this.state.newUserCredentials
-        fields[evt.target.name] = evt.target.value
-        // console.log(fields);
-        this.setState({ newUserCredentials: fields })
-    }
-    onPassword2Change = (evt) => {
-        this.setState({ newPassword2: evt.target.value })
-        const fields = this.state.newUserCredentials
-        fields[evt.target.name] = evt.target.value
-        // console.log(fields);
-        this.setState({ newUserCredentials: fields })
 
-    }
-    openPassword = () => {
-        this.setState({ openPass: true, inputType: 'text' });
-    }
-    closePassword = () => {
-        this.setState({ openPass: false, inputType: 'password' })
-    }
-    openPassword2 = () => {
-        this.setState({ openPass2: true, inputType2: 'text' });
-    }
-    closePassword2 = () => {
-        this.setState({ openPass2: false, inputType2: 'password' })
-    }
-
-    validatePassword = (password, confirmPassword) => {
+    const validatePassword = (password, confirmPassword) => {
         const validation = {
             hasMinimumLength: password.length >= 8,
             hasLowercase: /[a-z]/.test(password),
@@ -143,71 +86,115 @@ class Login extends React.Component {
             failedRules: failedRules
         };
     };
+    const handleSubmit = async (newUser) => {
+        // const navigate = useNavigate();
+        const { email, name, password } = newUser
+        console.log(email, name, password);
+        try {
+            const response = await axios.post('http://localhost:5000/login', { "email": email, "password": password });
+            if (response.ok) {
+                const user = await response.json();
+                console.log('Logged in user:', user);
+
+                // Redirect to another page
+                navigate('/dashboard');
+            } else {
+                console.error('Authentication failed');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+    };
+
+    const onEmailChange = (evt) => {
+        setNewEmail(evt.target.value);
+        const fields = newUserCredentials;
+        fields[evt.target.name] = evt.target.value;
+        setNewUserCredentials(fields);
+    }
+    const onPasswordChange = (evt) => {
+        setNewPassword(evt.target.value);
+        const fields = newUserCredentials;
+        fields[evt.target.name] = evt.target.value;
+        setNewUserCredentials(fields);
+
+    }
 
 
-    // console.log(this.state.newUserCredentials);
-    render() {
-        return (
-            <div className="container">
-                <div className="register-page">
-                    <div className='theErrors'>
-                        {this.state.fieldErrors2.failedRules.length > 0 && (
-                            <div className='theErrors'>
-                                <img src={Image.errorIcon} alt='cancel' />
-                                <div>
-                                    <ul>
-                                        {this.state.fieldErrors.email && (
-                                            <li>{this.state.fieldErrors.email}</li>
-                                        )}
-                                        {this.state.fieldErrors.password && (
-                                            <li>{this.state.fieldErrors.password}</li>
-                                        )}
-                                        {this.state.fieldErrors2.failedRules.map((error, index) => (
-                                            <li key={index}>{error}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <img src={Image.cancelIcon} alt='cancel' />
+    const openPassword = () => {
+        setOpenPassword({ openPass: true, inputType: 'text' });
+    }
+    const closePassword = () => {
+        setOpenPassword({ openPass: false, inputType: 'password' })
+    }
+
+
+    return (
+        <div className="container">
+            <div className="register-page">
+                {/* <div className='theErrors'>
+                    {fieldErrors2.failedRules.length > 0 && (
+                        <div className='theErrors'>
+                            <img src={Image.errorIcon} alt='cancel' />
+                            <div>
+                                <ul>
+                                    {fieldErrors2.failedRules.map((error, index) => (
+                                        <li key={index}>{error}</li>
+                                    ))}
+                                </ul>
                             </div>
-                        )}
-                    </div>
+                            <img src={Image.cancelIcon} alt='cancel' />
+                        </div>
+                    )}
+                </div> */}
 
-                    <div className="grad">
-                        <form onSubmit={this.onFormSubmit} className="register-form login-form" action="">
-                            <p>Login</p>
+                <div className="grad">
+                    <form onSubmit={onFormSubmit} className="register-form" action="">
+                        <p>Login</p>
+                        <div className='theInput'>
                             <input
-                                className={this.state.emailClasses}
+                                className={emailClasses}
                                 placeholder="Email Address"
                                 type="text" name="email" id=""
-                                value={this.state.newEmail}
-                                onChange={this.onEmailChange}
+                                value={newEmail}
+                                onChange={onEmailChange}
                             />
-                            <div className={"inputTag " + this.state.passwordClasses}>
+                            {/* <span className='pop'>{emailDoesNotExist && <div>email address already exist</div>}{fieldErrors.email && (<div>
+                                {fieldErrors.email}</div>
+                            )}</span> */}
+                        </div>
+                        <div className='theInput'>
+                            <div className={"inputTag " + passwordClasses}>
                                 <input placeholder='Password'
-                                    className={this.state.border}
-                                    value={this.state.newPassword}
-                                    onChange={this.onPasswordChange}
-                                    type={this.state.inputType}
+                                    // className={this.state.border}
+                                    value={newPassword}
+                                    onChange={onPasswordChange}
+                                    type={openThePassword.inputType}
                                     name="password"
                                 />
-                                {this.state.openPass ?
-                                    (<img src={Image.theeyeopen} alt='open password' onClick={this.closePassword} />) :
-                                    (<img src={Image.theeyeclose} alt='close password' onClick={this.openPassword} />)
+                                {openThePassword.openPass ?
+                                    (<img src={Image.theeyeopen} alt='open password' onClick={closePassword} />) :
+                                    (<img src={Image.theeyeclose} alt='close password' onClick={openPassword} />)
                                 }
                             </div>
-                            <button type="submit">Register</button>
-                            <Link className="myLink" to="/Register">Don't have an account</Link>
-                        </form>
-                        <div className="media">
-                            <p>Or Log in with</p>
-                            <img className="withgoogle1" src={Image.googleIconImg} alt="" />
+                            <div>
+                                {fieldErrors.password && (
+                                    <div className='pop'>{fieldErrors.password}</div>
+                                )}
+                            </div>
                         </div>
+                        <button type="submit">Register</button>
+                        <Link className="myLink" to="/login">Already have an account</Link>
+                    </form>
+                    <div className="media">
+                        <p>Or sign up with</p>
+                        <img className="withgoogle1" src={Image.googleIconImg} alt="" />
                     </div>
-                <Link to="/" className="iconimg main-icon">icon</Link>
                 </div>
+                <Link to="/" className="iconimg main-icon">icon</Link>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default Login;
+export default Login

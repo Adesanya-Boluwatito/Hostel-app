@@ -3,3 +3,4 @@ serviceAccount.json
 upload.py
 file.json
 .env
+node_modules/

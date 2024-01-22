@@ -19,8 +19,8 @@ class HomePage extends React.Component {
                             {({ isLoggedIn, login, logout }) => (
                                 <div>
                                     {isLoggedIn ? (
-                                        <div className="links">
-                                            <div class="">Saved house</div>
+                                        <div className="links link-extends">
+                                            <div class="">Favourite homes</div>
                                             <Link>Add Property</Link>
                                             <Link to="/">
                                                 <div className="user"><img src={Images.profileavatar} alt="backgroung_imgcd" /><p>profile</p></div>
