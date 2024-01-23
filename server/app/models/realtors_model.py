@@ -1,12 +1,15 @@
+from flask_login import UserMixin
 from datetime import datetime
 from config import db
 
 # Realtor model
 
 
-class Realtor(db.Model):
+class Realtor(db.Model, UserMixin):
     id = db.Column(db.String(255), primary_key=True)
     realtor_id = db.Column(db.String(255),index=True, unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('realtor', lazy=True))
     company_name = db.Column(db.String(255), index=False, unique=False, nullable=False)
     description = db.Column(db.Text(255), index=False, unique=False)
     profile_picture = db.Column(db.String(255), index=False, unique=False)

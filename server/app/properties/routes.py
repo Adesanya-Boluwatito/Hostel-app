@@ -5,18 +5,11 @@ from datetime import datetime, timedelta
 from models.properties_model import Property, Image
 from models.realtors_model import Realtor
 from config import db
+from credentials import *
 from properties import bp
 from sqlalchemy import func
-import os
-from dotenv import load_dotenv
 import uuid  # Import uuid
-import firebase_admin
-from firebase_admin import credentials, storage
 
-load_dotenv()
-
-cred = credentials.Certificate(os.getenv(r"FIREBASE_SERVICE_ACCOUNT_PATH"))
-firebase_admin.initialize_app(cred, {'storageBucket': os.getenv("FIREBASE_STORAGE_BUCKET")})
 
 
 
@@ -28,7 +21,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @bp.route('/property/new_property/<realtor_id>', methods=['POST'])
-# @login_required
+@login_required
 def create_property(realtor_id):
     print(realtor_id)
     realtor_exists = Realtor.query.filter_by(realtor_id=realtor_id).first() is not None

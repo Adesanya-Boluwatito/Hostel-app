@@ -46,6 +46,10 @@ def register():
 
 @bp.route('/login', methods=["POST"])
 def login():
+    if current_user.is_authenticated:
+        return jsonify({"error": "User is already logged in"}), 400
+
+
     if request.method == "POST":
         email = request.json['email']
         password = request.json['password']

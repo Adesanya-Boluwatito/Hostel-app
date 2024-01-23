@@ -3,3 +3,5 @@ serviceAccount.json
 upload.py
 file.json
 .env
+.vscode
+node_modules
