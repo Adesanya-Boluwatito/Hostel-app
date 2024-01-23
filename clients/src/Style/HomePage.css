@@ -37,9 +37,12 @@ nav>div>div:hover {
 
 .links {
     display: flex;
-    width: 370px;
+    width: 250px;
     align-items: center;
     justify-content: space-between;
+}
+.link-extends{
+    width: 550px;
 }
 
 .signup {
