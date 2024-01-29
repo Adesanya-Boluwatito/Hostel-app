@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path='/' Component={HomePage} />
             <Route path='/register' Component={Register} />
-            <Route path='/success' Component={SuccessPage} />
+            {/* <Route path='/success' Component={SuccessPage} /> */}
             <Route path='/login' Component={Login} />
             {/* <Route path='/newregister' Component={NewRegister} /> */}
             <Route path='/formregister' Component={RegisterForm} />
