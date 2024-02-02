@@ -1,0 +1,89 @@
+/* /////////////////// */
+.house-location {
+    width: 250px !important;
+    height: 360px;
+    background-image: url("../Images/location1.jpg");
+    display: flex !important;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: flex-end;
+    background-size: cover;
+    margin: 15px;
+
+}
+
+.location {
+    min-width: 179px;
+    height: 63px;
+    background-color: rgba(255, 253, 252, 0.9);
+    text-align: center;
+    border-radius: 6px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 40px;
+}
+
+.theLocation {
+    color: #1A1A1A;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.no-of-prop {
+    color: #B39359;
+    font-size: 14px;
+}
+
+.houseHead {
+    text-align: center;
+    color: #DF7030;
+    font-size: 16px;
+    padding-bottom: 7px;
+}
+
+.houseSubHead {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: math;
+}
+
+
+
+.slick-dots li button:before {
+    font-size: 20px;
+}
+
+
+
+.slick-next {
+    right: 34px;
+}
+.slick-prev {
+    left: 20px;
+    z-index: 2 !important;
+    border: 2px solid red;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 50px;
+    line-height: 1;
+    opacity: 1;
+    color: white;
+}
+
+.slick-prev,
+.slick-next {
+    background-color: transparent!important;
+}
+
+
+.slick-prev {
+    border: none;
+}
+.slick-slider {
+    width: 97%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}

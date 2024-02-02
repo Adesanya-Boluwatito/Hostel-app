@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import '../Style/register.css';
+import '../Style/Login.css';
 import Image from './Images';
 import isEmail from 'validator/lib/isEmail';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import '../Style/Location.css';
 
 const Login = () => {
     const [newEmail, setNewEmail] = useState();
@@ -149,7 +150,7 @@ const Login = () => {
                 </div> */}
 
                 <div className="grad">
-                    <form onSubmit={onFormSubmit} className="register-form" action="">
+                    <form onSubmit={onFormSubmit} className="register-form login-form" action="">
                         <p>Login</p>
                         <div className='theInput'>
                             <input
@@ -162,6 +163,7 @@ const Login = () => {
                             {/* <span className='pop'>{emailDoesNotExist && <div>email address already exist</div>}{fieldErrors.email && (<div>
                                 {fieldErrors.email}</div>
                             )}</span> */}
+                            <span className='pop'></span>
                         </div>
                         <div className='theInput'>
                             <div className={"inputTag " + passwordClasses}>
@@ -184,7 +186,7 @@ const Login = () => {
                             </div>
                         </div>
                         <button type="submit">Register</button>
-                        <Link className="myLink" to="/login">Already have an account</Link>
+                        <Link className="myLink" to="/register">Already have an account</Link>
                     </form>
                     <div className="media">
                         <p>Or sign up with</p>

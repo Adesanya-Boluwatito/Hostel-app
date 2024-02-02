@@ -11,6 +11,11 @@ import cancelIcon from '../Images/Page-1.svg'
 import errorIcon from '../Images/error-svgrepo.svg'
 import maskgroup3 from '../Images/MaskGroup3.png'
 import profileavatar from '../Images/profile-avatar.svg'
+import hostelImage from '../Images/imageofhostel.jpg'
+import starRatings from '../Images/Icon awesome-star.svg'
+import bedroomIcon from '../Images/BedIcon (1).svg'
+import bathroomIcon from '../Images/BathIcon.svg'
+import cameraIcon from '../Images/Icon fa-solid-camera.svg'
 
 const myImages = {
     desktopBackgroundImg: desktopBackgroundImg,
@@ -24,7 +29,12 @@ const myImages = {
     cancelIcon,
     errorIcon,
     maskgroup3,
-    profileavatar
+    profileavatar,
+    hostelImage,
+    starRatings,
+    bedroomIcon,
+    bathroomIcon,
+    cameraIcon
 }
 
 export default myImages;
