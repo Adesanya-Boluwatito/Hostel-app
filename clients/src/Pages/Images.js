@@ -16,6 +16,7 @@ import starRatings from '../Images/Icon awesome-star.svg'
 import bedroomIcon from '../Images/BedIcon (1).svg'
 import bathroomIcon from '../Images/BathIcon.svg'
 import cameraIcon from '../Images/Icon fa-solid-camera.svg'
+import plusIcon from '../Images/Icon akar-plus.svg'
 
 const myImages = {
     desktopBackgroundImg: desktopBackgroundImg,
@@ -34,7 +35,8 @@ const myImages = {
     starRatings,
     bedroomIcon,
     bathroomIcon,
-    cameraIcon
+    cameraIcon,
+    plusIcon
 }
 
 export default myImages;

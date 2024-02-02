@@ -15,12 +15,9 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' Component={HomePage} />
-<<<<<<< HEAD
             <Route path='/register' Component={RegisterForm} />
-=======
-            <Route path='/register' Component={Register} />
+            {/* <Route path='/register' Component={Register} /> */}
             {/* <Route path='/success' Component={SuccessPage} /> */}
->>>>>>> refs/remotes/origin/main
             <Route path='/login' Component={Login} />
             <Route path='/formregister' Component={RegisterForm} />
             <Route path='/' element={<HomePage />} />

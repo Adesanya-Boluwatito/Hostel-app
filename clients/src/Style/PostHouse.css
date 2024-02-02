@@ -117,10 +117,47 @@ select:active {
     overflow: hidden;
 }
 
-.file-input {
+/* .file-input {
     width: 100px;
     height: 100px;
     background-color: rgba(10, 39, 99, 0.41);
-    /* opacity: 0; */
     cursor: pointer;
+} */
+
+.add-image {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(10, 39, 99, 0.41);
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.add-image > img {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.add-image > input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    z-index: 1;
+    opacity: 0;
+}
+.for-add-image{
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 20px;
+    column-gap: 20px;
+    align-items: end;
+}
+.for-add-image > img{
+    border-radius: 10px;
+    width: 128px;
+    width: 120px;
 }

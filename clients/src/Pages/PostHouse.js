@@ -9,7 +9,9 @@ const PostHouse = () => {
     const [category, setCategory] = useState([]);
     const [propType, setPropType] = useState([]);
     const [subCategoryOptions, setSubCategoryOptions] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
+    // const [imageSrc, setImageSrc] = useState(null);
+    const [imageSrcList, setImageSrcList] = useState([]);
 
     const categoryOptions = [
         { value: 'Sale', label: 'Sale' },
@@ -73,15 +75,24 @@ const PostHouse = () => {
     };
 
     const handleFileChange = (event) => {
-        // Get the selected file from the event
-        const file = event.target.files[0];
+        const files = event.target.files;
 
-        // Update the state with the selected file
-        setSelectedFile(file);
+        // Loop through the selected files
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
 
-        // You can perform additional actions with the file if needed
-        console.log('Selected File:', file);
+            // Set up the event handler for when the reading is completed
+            reader.onloadend = () => {
+                // Update the image source list with the new image source
+                setImageSrcList((prevImageSrcList) => [...prevImageSrcList, reader.result]);
+            };
+
+            // Read the contents of the current file as a data URL
+            reader.readAsDataURL(file);
+        }
     };
+
     return (
         <div className='posthouse'>
             <nav>
@@ -180,12 +191,16 @@ const PostHouse = () => {
                 <div className='for-photo'>
                     <label className="file-input-label">Add photo</label>
                     <div>First picture - is the title picture. You can change the order of photos: just grab your photos and drag</div>
-                    <input type='file' onChange={handleFileChange} className="file-input" />
-                    {selectedFile && (
-                        <div>
-                            <p>Name: {selectedFile.name}</p>
+                    <div className='for-add-image'>
+                        <div className='add-image'>
+                            <img src={myImages.plusIcon} alt='add-icon' />
+                            <input type='file' onChange={handleFileChange} className="file-input" />
                         </div>
-                    )}
+                        {/* Display the preview of each selected image */}
+                        {imageSrcList.map((imageSrc, index) => (
+                            <img key={index} src={imageSrc} alt={`Preview ${index + 1}`} style={{ width: '100px', height: 'auto' }} />
+                        ))}                    </div>
+
                 </div>
             </div >
         </div >
