@@ -1,6 +1,8 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Schibsted+Grotesk:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Montserrat&family=Schibsted+Grotesk:wght@600&display=swap'); 
 */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Figtree:wght@300;400&family=Montserrat&family=Mulish:wght@300&family=Schibsted+Grotesk:wght@600&display=swap');
+
 * {
 
     box-sizing: border-box;
@@ -17,19 +19,36 @@
 }
 
 .homePage {
-    background-color: #0A2463;
+    background-image: url('../Images/homepagimg.jpg');
+    background-size: cover;
+    /* background-color: #0A2463; */
     color: white;
     height: 768px;
     margin-bottom: 100px;
+    position: relative;
 }
 
+
+
+.homeImage {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.771);
+    position: absolute;
+    top: 0px;
+    z-index: 0;
+}
+.homePageText{
+    z-index: 2;
+}
 nav {
     align-items: center;
     display: flex;
     font-size: 18px;
     justify-content: space-between;
     padding: 15px 25px;
-
+    z-index: 2;
+    position: relative;
 }
 
 nav>div>div:hover {
@@ -98,7 +117,7 @@ nav>div>div:hover {
 
 .homePageText1 {
     font-size: 60px;
-    width: 460px;
+    /* width: 460px; */
     font-family: 'Bricolage Grotesque', sans-serif;
     font-family: 'Schibsted Grotesk', sans-serif;
 }
@@ -106,12 +125,13 @@ nav>div>div:hover {
 
 
 .homePageText {
-    padding-left: 90px;
+    padding-left: 190px;
     margin-top: 125px;
     position: relative;
+    /* text-align: center; */
 }
 
-.homePageImage {
+/* .homePageImage {
     position: absolute;
     top: 0px;
     height: 628px;
@@ -127,7 +147,6 @@ nav>div>div:hover {
     display: flex;
     justify-content: center;
     align-content: center;
-    /* align-items: 12; */
     padding-top: 7px;
 }
 
@@ -138,8 +157,7 @@ nav>div>div:hover {
 .homePageImage2 {
     height: 680px;
     width: 498px;
-    /* border-radius: 250px 250px 0px 0px; */
-}
+} */
 
 /* ////////////// */
 input:focus {
@@ -148,7 +166,8 @@ input:focus {
 
 .user {
     display: flex;
-    align-items: center;
+    align-items: center;    
+    height: 130px;
 }
 
 .user>img {

@@ -149,8 +149,6 @@ const RegisterForm = () => {
   }
 
   return (
-    ////////////////////
-    ////////////////////
     <div className="container">
       <div className="register-page">
         <div className='theErrors'>
@@ -245,4 +243,4 @@ const RegisterForm = () => {
   )
 }
 
-export default RegisterForm
+export default RegisterForm;

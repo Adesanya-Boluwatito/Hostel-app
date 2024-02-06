@@ -12,6 +12,7 @@ const PostHouse = () => {
     // const [selectedFile, setSelectedFile] = useState(null);
     // const [imageSrc, setImageSrc] = useState(null);
     const [imageSrcList, setImageSrcList] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const categoryOptions = [
         { value: 'Sale', label: 'Sale' },
@@ -77,9 +78,22 @@ const PostHouse = () => {
     const handleFileChange = (event) => {
         const files = event.target.files;
 
+        // Check if the number of selected files is more than seven
+        if (files.length + imageSrcList.length > 7) {
+            setErrorMessage('You can upload up to seven images.');
+            return;
+        }
+
         // Loop through the selected files
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
+
+            // Check if the file is an image
+            if (!file.type.startsWith('image/')) {
+                setErrorMessage('Please select only image files.');
+                return;
+            }
+
             const reader = new FileReader();
 
             // Set up the event handler for when the reading is completed
@@ -91,7 +105,28 @@ const PostHouse = () => {
             // Read the contents of the current file as a data URL
             reader.readAsDataURL(file);
         }
+
+        // Clear any previous error messages
+        setErrorMessage('');
     };
+    // const handleFileChange = (event) => {
+    //     const files = event.target.files;
+
+    //     // Loop through the selected files
+    //     for (let i = 0; i < files.length; i++) {
+    //         const file = files[i];
+    //         const reader = new FileReader();
+
+    //         // Set up the event handler for when the reading is completed
+    //         reader.onloadend = () => {
+    //             // Update the image source list with the new image source
+    //             setImageSrcList((prevImageSrcList) => [...prevImageSrcList, reader.result]);
+    //         };
+
+    //         // Read the contents of the current file as a data URL
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
 
     return (
         <div className='posthouse'>
@@ -199,7 +234,9 @@ const PostHouse = () => {
                         {/* Display the preview of each selected image */}
                         {imageSrcList.map((imageSrc, index) => (
                             <img key={index} src={imageSrc} alt={`Preview ${index + 1}`} style={{ width: '100px', height: 'auto' }} />
-                        ))}                    </div>
+                        ))}
+                    </div>
+                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
                 </div>
             </div >
