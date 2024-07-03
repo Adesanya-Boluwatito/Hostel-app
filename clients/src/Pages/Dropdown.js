@@ -8,7 +8,7 @@ const Dropdown = () => {
                 <a href="/"><img src="images/logo-l5.svg" alt="Logo" /></a>
                 <nav>
                     <ul>
-                        <li class="has-submenu">
+                        <li className="has-submenu">
                             <a href="/">Services</a>
                             <ul>
                                 <li><a href="/1">Branding</a></li>

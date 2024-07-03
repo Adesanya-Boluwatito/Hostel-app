@@ -2,9 +2,15 @@
     --def-transition-duration: .2s;
 }
 
+
 nav {
     z-index: 3;
-    top: -35px;
+    width: 100%;
+    /* border: 1px solid red; */
+    font-family: "Averta Demo" !important;
+    font-size: 16px;
+    font-weight: 400;
+
 }
 
 nav ul {
@@ -14,6 +20,8 @@ nav ul {
     display: flex;
     gap: 3rem;
     position: relative;
+    background-color: yellowgreen;
+    /* border */
 }
 
 nav ul a {
@@ -111,4 +119,19 @@ nav ul {
     transition-property: transform;
     transition-duration: var(--def-transition-duration);
     transition-timing-function: ease-in-out;
+}
+
+/* /////////////////////////////////////// */
+.iconimg span {
+    width: 14px;
+    height: 14px;
+    background-color: #0E49A5;
+    display: block;
+    content: "kdnfkn";
+    border-radius: 50%;
+}
+
+.sidenav {
+    width: 461px;
+    /* margin-top: 30px; */
 }

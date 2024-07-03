@@ -34,17 +34,25 @@
 }
 
 .houseHead {
-    text-align: center;
-    color: #DF7030;
-    font-size: 16px;
-    padding-bottom: 7px;
+    text-align: left;
+    color:  #18425D;
+    /* font-family: "Averta Demo"; */
+    font-size: 34.313px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 116.576% */
+    letter-spacing: 0.4px;
 }
 
 .houseSubHead {
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    font-family: math;
+    text-align: left;
+    color:  #848F9F;
+    /* font-family: Inter; */
+    font-size: 15.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 38px; /* 245.161% */
+    letter-spacing: 0.4px;
 }
 
 
@@ -61,7 +69,7 @@
 .slick-prev {
     left: 20px;
     z-index: 2 !important;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .slick-prev:before,

@@ -2,6 +2,7 @@ import React from 'react'
 import myImages from './Images'
 import '../Style/Popular.css'
 import Slider from "react-slick";
+import
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;

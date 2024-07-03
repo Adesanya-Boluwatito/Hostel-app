@@ -1,0 +1,23 @@
+.purpose {
+    background-color: rgba(235, 248, 254, 1);
+}
+
+.purpose-headings {
+    color: rgba(24, 66, 93, 1);
+    /* font-family: Averta Demo; */
+    font-size: 34.45px;
+    font-weight: 400;
+    line-height: 48px;
+    text-align: left;
+    width: 652px;
+    margin-bottom: 20px;
+}
+
+.purpose-sub-headings {
+    /* font-family: Inter; */
+    font-size: 15.63px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    color: rgba(132, 143, 159, 1);
+}
