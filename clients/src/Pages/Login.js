@@ -35,12 +35,12 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:5000/login', { "email": user.newEmail, "password": newPassword });
 
-            const data = await response.json();
+            const data = response.data;
             console.log('Logged in user:', user);
             if (data.success) {
                 console.log('Login sucessful');
                 // Redirect to another page
-                navigate('/dashboard');
+                navigate('/');
             } else {
                 console.error('Login failed:', data.message);
             }
